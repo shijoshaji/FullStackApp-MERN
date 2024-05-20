@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/dbConnect';
+import shortURL from './routes/shortURL-routes';
 
 
 
@@ -27,6 +28,10 @@ app.use(express.json());
 
 // 
 app.use(express.urlencoded({ extended: true }));
+
+
+// API
+app.use("/api/", shortURL);
 
 
 
