@@ -28,7 +28,7 @@ export const getAllURL = async (req: express.Request, res: express.Response) => 
     try {
         const allURL = await urlModel.find();
         if (allURL.length <= 0) {
-            res.status(404).send({ message: "ShortURL's not Found" });
+            res.status(404).send({ err_msg: "ShortURL's not Found" });
         } else {
             res.status(200).send(allURL);
         }
@@ -58,4 +58,19 @@ export const getURLByID = async (req: express.Request, res: express.Response) =>
     }
 };
 
+export const deleteURL = async (req: express.Request, res: express.Response) => {
+    console.log("inside:", deleteURL.name);
 
+    try {
+        const shortURL = await urlModel.findByIdAndDelete({ _id: req.params.id });
+        if (!shortURL) {
+            res.status(404).send({ err_msg: "ID/URL Not found", method_name: deleteURL.name });
+        } else {
+            res.status(204).send({ err_msg: "URL deleted", method_name: deleteURL.name });
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ err_msg: "Something went wrong", method_name: deleteURL.name });
+    }
+};
