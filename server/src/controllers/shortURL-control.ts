@@ -39,13 +39,13 @@ export const getAllURL = async (req: express.Request, res: express.Response) => 
     }
 };
 
-export const getURLByID = async (req: express.Request, res: express.Response) => {
-    console.log("inside:", getURLByID.name);
+export const getURLByShortURLValue = async (req: express.Request, res: express.Response) => {
+    console.log("inside:", getURLByShortURLValue.name);
 
     try {
         const shortURL = await urlModel.findOne({ shortURL: req.params.id });
         if (!shortURL) {
-            res.status(404).send({ err_msg: "ID/URL Not found", method_name: getURLByID.name });
+            res.status(404).send({ err_msg: "ID/URL Not found", method_name: getURLByShortURLValue.name });
         } else {
             shortURL.clicks++;
             shortURL.save();
@@ -54,7 +54,7 @@ export const getURLByID = async (req: express.Request, res: express.Response) =>
 
     } catch (error) {
         console.log(error);
-        res.status(500).send({ err_msg: "Something went wrong", method_name: getURLByID.name });
+        res.status(500).send({ err_msg: "Something went wrong", method_name: getURLByShortURLValue.name });
     }
 };
 
