@@ -7,8 +7,26 @@ import connectDB from './config/dbConnect';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.BACKEND_PORT || 5001;
 const app = express();
+
+
+// Cors configuration - Allows requests from localhost:4200
+const corsOptions = {
+  origin: `http://localhost:${process.env.FRONTEND_PORT}`,
+  optionsSuccessStatus: 204,
+  methods: 'GET, POST, PUT, DELETE',
+  credentials: true
+};
+
+// Use cors middleware
+app.use(cors(corsOptions));
+
+// Use express.json() middleware to parse JSON bodies of requests
+app.use(express.json());
+
+// 
+app.use(express.urlencoded({ extended: true }));
 
 
 
