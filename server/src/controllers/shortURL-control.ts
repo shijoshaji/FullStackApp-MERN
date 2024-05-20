@@ -12,7 +12,7 @@ import { Response } from 'express';
  * @param {String} func - The name of the method where the error occurred.
  * @returns {Response} - The response object with the 500 status and error message.
  */
-function server500(res: Response, func: String) {
+function server500(res: Response, func: String): Response {
     return res.status(500).send({ err_msg: "Something went wrongX", method_name: func });
 }
 
@@ -29,7 +29,7 @@ function server500(res: Response, func: String) {
  * @param {express.Response} res - The response object to send the result of the creation operation.
  * @returns {Promise<void>} - A Promise that resolves once the creation process is complete.
  */
-export const createURL = async (req: express.Request, res: express.Response) => {
+export const createURL = async (req: express.Request, res: express.Response): Promise<void> => {
     console.log("inside:", createURL.name);
     try {
         let { fullURL } = req.body;
@@ -60,7 +60,7 @@ export const createURL = async (req: express.Request, res: express.Response) => 
  * @param {express.Response} res - The response object to send the list of URLs or error response.
  * @returns {Promise<void>} - A Promise that resolves once the retrieval and response sending process is complete.
  */
-export const getAllURL = async (req: express.Request, res: express.Response) => {
+export const getAllURL = async (req: express.Request, res: express.Response): Promise<void> => {
     console.log("inside:", getAllURL.name);
 
 
@@ -90,7 +90,7 @@ export const getAllURL = async (req: express.Request, res: express.Response) => 
  * @param {express.Response} res - The response object to handle the redirection or error response.
  * @returns {Promise<void>} - A Promise that resolves once the redirection or error handling is complete.
  */
-export const getURLByShortURLValue = async (req: express.Request, res: express.Response) => {
+export const getURLByShortURLValue = async (req: express.Request, res: express.Response): Promise<void> => {
     console.log("inside:", getURLByShortURLValue.name);
 
     try {
@@ -120,7 +120,7 @@ export const getURLByShortURLValue = async (req: express.Request, res: express.R
  * @param {express.Response} res - The response object to send the result of the deletion operation.
  * @returns {Promise<void>} - A Promise that resolves once the deletion process is complete.
  */
-export const deleteURL = async (req: express.Request, res: express.Response) => {
+export const deleteURL = async (req: express.Request, res: express.Response): Promise<void> => {
     console.log("inside:", deleteURL.name);
 
     try {
