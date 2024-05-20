@@ -21,4 +21,22 @@ export const createURL = async (req: express.Request, res: express.Response) => 
     }
 };
 
+export const getAllURL = async (req: express.Request, res: express.Response) => {
+    console.log("inside:", getAllURL.name);
+
+
+    try {
+        const allURL = await urlModel.find();
+        if (allURL.length <= 0) {
+            res.status(404).send({ message: "ShortURL's not Found" });
+        } else {
+            res.status(200).send(allURL);
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ err_msg: "Something went wrong", method_name: getAllURL.name });
+    }
+};
+
 
