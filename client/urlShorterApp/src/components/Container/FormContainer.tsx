@@ -1,8 +1,25 @@
+import axios from 'axios';
 import * as React from 'react';
+import { useState } from 'react';
+import { serverURL } from '../../helpers/Constants';
 
 interface IFormContainerProps {}
 
 const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
+  const [fullURL, setfullURL] = useState<string>('');
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      console.log('Inside');
+      await axios.post(`${serverURL}/shortURL`, {
+        fullURL: fullURL,
+      });
+      setfullURL('');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container mx-auto p-1">
       <div className="bg-banner my-8 rounded-xl bg-cover bg-center">
@@ -13,7 +30,7 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
             <p className="text-blue-300 font-light text-right  pb-3">Free Tool</p>
           </span>
           {/* FORM */}
-          <form action="">
+          <form action="" onSubmit={handleSubmit}>
             <div className="flex">
               <div className="relative w-full">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-2 pointer-events-none text-yellow-300 bg-slate-500 rounded-s-full">
@@ -25,6 +42,8 @@ const FormContainer: React.FunctionComponent<IFormContainerProps> = () => {
                   name="urlName"
                   id="urlName"
                   placeholder="Paster Long URL"
+                  value={fullURL}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setfullURL(e.target.value)}
                   className="w-full block p-3 ps-32  text-sm text-gray-500 border border-gray-800 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500"
                 />
                 <button
