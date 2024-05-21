@@ -1,12 +1,16 @@
 import './App.css';
+import Container from './components/Container/Container';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 
 function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-purple-500">
-      Hello world!
-    </h1>
+      <Header/>
+      <Container/>
+      <Footer/>
+    
     </>
   )
 }
